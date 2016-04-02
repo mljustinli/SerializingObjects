@@ -7,12 +7,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Serializer {
+	public static String FOLDER = "Player";
 	public static String PLAYER_SAVE_FILE = "PlayerInfo.txt";
 	
 	public void serialize(PlayerInfo pi) throws IOException {
 		File f1 = new File ("Player");
 		f1.mkdir();
-		File f = new File(PLAYER_SAVE_FILE);
+		File f = new File(FOLDER + "/" + PLAYER_SAVE_FILE);
 		if (!f.exists()) {
 //			f.mkdir();
 			f.createNewFile();
@@ -32,7 +33,7 @@ public class Serializer {
 	public PlayerInfo deserialize() {
 		PlayerInfo pi;
 		try {
-			FileInputStream fin = new FileInputStream(PLAYER_SAVE_FILE);
+			FileInputStream fin = new FileInputStream(FOLDER + "/" + PLAYER_SAVE_FILE);
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			pi = (PlayerInfo)ois.readObject();
 			ois.close();
